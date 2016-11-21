@@ -1,0 +1,9 @@
+<h1>{{ object.title }}</h1>
+
+{% for case in object.testcase_set.all %}
+    <li>{{ case.title }}</li>
+{% empty %}
+    <li>No cases yet.</li>
+{% endfor %}
+</ul>
+

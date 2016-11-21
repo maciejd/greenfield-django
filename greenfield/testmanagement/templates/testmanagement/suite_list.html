@@ -1,0 +1,8 @@
+<h1>Suites</h1>
+<ul>
+{% for suite in object_list %}
+    <li><a href="{% url 'greenfield:suite' suite.id %}">{{ suite.title }}</a></li>
+{% empty %}
+    <li>No suites yet.</li>
+{% endfor %}
+</ul>

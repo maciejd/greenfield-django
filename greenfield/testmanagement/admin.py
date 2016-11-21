@@ -3,6 +3,7 @@ from .models import TestCase, TestRun, TestSuite, TestExecution
 
 
 class CaseInline(admin.StackedInline):
+    fields = ['title','suite']
     model = TestCase
 
 class SuiteAdmin(admin.ModelAdmin):
