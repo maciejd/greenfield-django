@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['192.168.0.88']
 # Application definition
 
 INSTALLED_APPS = [
+    'testmanagement.apps.TestmanagementConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
