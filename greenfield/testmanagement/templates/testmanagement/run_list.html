@@ -1,5 +1,6 @@
 {% extends 'testmanagement/base.html' %}
 {% block content %}
+{% load testmanagement_extras %}
 <div class="container-fluid">
  <div class="row">
     <div class="col-lg-8 col-lg-offset-2">
@@ -12,6 +13,7 @@
       <table class="table">
          <tr>
            <th>Run name</th>
+           <th>Source</th>
            <th>Created date</th>
            <th class="col-xs-6 col-sm-6">Summary</th>
 	   <th class="text-right">Delete run</th>
@@ -19,16 +21,17 @@
          {% for run in runs %}
          <tr>
           <td><a href=#>{{ run.title }}</a></td>
-          <td>{{ run.created }}</td>
+	  <td>{{ run.suite.title }}</td>
+          <td>{{ run.created_at }}</td>
           <td>
      	    <div class="progress">
-             <div class="progress-bar progress-bar-success" style="width:33%">
+             <div class="progress-bar progress-bar-success" style="width:{{ run.id|ratio:1 }}%">
                <span class="sr-only"></span>
              </div>
-             <div class="progress-bar progress-bar-warning" style="width:33%">
+             <div class="progress-bar progress-bar-warning" style="width:{{ run.id|ratio:3 }}%">
                <span class="sr-only"></span>
              </div>        
-             <div class="progress-bar progress-bar-danger" style="width:33%">
+             <div class="progress-bar progress-bar-danger" style="width:{{ run.id|ratio:2 }}%">
                <span class="sr-only"></span>
              </div>
            </div>
@@ -59,7 +62,9 @@
 <div class="add-run input-group">
                <select class="form-control" name="suite_id">
                {% for suite in suites %}
-                 <option value="{{ suite.id }}"}>{{ suite.title }}</option>
+                 {% if suite.testcase_set.all.count > 0 %}
+                   <option value="{{ suite.id }}"}>{{ suite.title }}</option>
+                 {% endif %}
                {% endfor %}
               </select>
              <input type="text" class="form-control" name="title" placeholder="Test run title" required>

@@ -40,7 +40,10 @@ def show_runs(request):
 
 def add_run(request):
     ts = get_object_or_404(TestSuite, pk=request.POST['suite_id'])
-    TestRun(title=request.POST['title'], suite=ts).save()
+    tr = TestRun(title=request.POST['title'], suite=ts)
+    tr.save()
+    for tc in ts.testcase_set.all():
+        TestExecution(case=tc, run=tr, status=0).save()
     return HttpResponseRedirect(reverse('greenfield:runs'))
   
 def delete_run(request, run_id):
