@@ -9,3 +9,7 @@ def get_ratio(run_id, status):
     selected = TestExecution.objects.filter(run=run, status=status).count()
     return selected/float(all)*100
 
+@register.filter(name='label')
+def get_label(status):
+    map = {0:'default', 1:'success', 2:'danger',3:'warning'}
+    return map[status]
