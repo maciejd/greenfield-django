@@ -15,3 +15,11 @@ class SuiteListView(generic.ListView):
 class SuiteDetailView(generic.DetailView):
     model = TestSuite
     template_name = 'testmanagement/suite_detail.html'
+
+def add_suite(request):
+    TestSuite(title=request.POST['title']).save()
+    return HttpResponseRedirect(reverse('greenfield:suites'))
+
+def delete_suite(request, pk):
+    get_object_or_404(TestSuite, pk=pk).delete()
+    return HttpResponseRedirect(reverse('greenfield:suites'))

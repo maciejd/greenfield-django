@@ -1,7 +1,3 @@
-
-<ul>
-</ul>
-
 {% extends 'testmanagement/base.html' %}
 
 {% block content %}
@@ -26,8 +22,8 @@
     <a href="{% url 'greenfield:suite' suite.id %}">{{ suite.title }}</a>
   </td>
   <td>
-    <form action="#" method=post>
-      <input type=hidden value="" name="ts_id"></input>
+    <form action="{% url 'greenfield:delete_suite' suite.id %}" method=post>
+    {% csrf_token %}
       <button type=submit class="btn btn-danger pull-right">Delete</button>
     </form>
   </td>
@@ -44,8 +40,9 @@
 </div>
 {% endif %}
 <div class="row">
- <form action="#" method=post>
-<div class="form-group col-lg-6 col-lg-offset-2">
+  <form action="{% url 'greenfield:add_suite' %}" method=post>
+  {% csrf_token %}
+    <div class="form-group col-lg-6 col-lg-offset-2">
       <div class="input-group">
              <input type="text" class="form-control" name="title" placeholder="Test suite title" required>
              <span class="input-group-btn">
