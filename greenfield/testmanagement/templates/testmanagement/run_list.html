@@ -25,14 +25,14 @@
           <td>{{ run.created_at }}</td>
           <td>
      	    <div class="progress">
-             <div class="progress-bar progress-bar-success" style="width:{{ run.id|ratio:1 }}%">
-               <span class="sr-only"></span>
+             <div class="progress-bar progress-bar-success" style="width:{{ run.id|ratio:1 }}%; min-width: 2em;">
+               {{ run.id|ratio:1 }}%               
              </div>
-             <div class="progress-bar progress-bar-warning" style="width:{{ run.id|ratio:3 }}%">
-               <span class="sr-only"></span>
+             <div class="progress-bar progress-bar-warning" style="width:{{ run.id|ratio:3 }}%; min-width: 2em;">
+               {{ run.id|ratio:3 }}%
              </div>        
-             <div class="progress-bar progress-bar-danger" style="width:{{ run.id|ratio:2 }}%">
-               <span class="sr-only"></span>
+             <div class="progress-bar progress-bar-danger" style="width:{{ run.id|ratio:2 }}%; min-width: 2em;">
+               {{ run.id|ratio:2 }}%
              </div>
            </div>
          </td>
