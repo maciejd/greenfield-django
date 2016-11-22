@@ -59,3 +59,7 @@ def update_result(request, run_id, execution_id):
     e.status=request.POST['status']
     e.save()
     return HttpResponseRedirect(reverse('greenfield:run', kwargs={'run_id':run_id}))
+
+class CaseDetailView(generic.DetailView):
+    model = TestCase
+    template_name = 'testmanagement/case_detail.html'

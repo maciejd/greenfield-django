@@ -15,4 +15,5 @@ urlpatterns = [
     url(r'^run/(?P<run_id>[0-9]+)/', views.show_run, name='run'),
     url(r'^run/add$', views.add_run, name='add_run'),
     url(r'^run/delete/(?P<run_id>[0-9]+)/&$', views.delete_run, name='delete_run'),
+    url(r'case/(?P<pk>[0-9]+)/$', views.CaseDetailView.as_view(), name='case'),
     ]

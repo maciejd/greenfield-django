@@ -1,0 +1,38 @@
+{% extends 'testmanagement/base.html' %}
+{% block content %}
+{% load testmanagement_extras %}
+<div class="container-fluid">
+  <div class="row">
+     <div class="col-lg-8 col-lg-offset-2">
+       <h3>Executions for {{ object.title }}</h3>
+    </div>
+  </div>
+{% if object.testexecution_set.all %}
+  <div class="row">
+     <div class="col-lg-8 col-lg-offset-2">
+       <table class="table">
+         <tr>
+           <th>Test Run</th>
+           <th>Executed on</th>
+           <th>Status</th>
+         {% for e in object.testexecution_set.all %}
+         <tr>
+          <td><a href="{% url 'greenfield:run' e.run.id  %}">{{ e.run.title }}</a></td>
+          <td>{{ e.updated_at }} </td>
+          <td><span class="label label-{{ e.status|label }}">{{ e.get_status_display }}</span></td>
+         </tr>
+  {% endfor %}
+      </table>
+    </div>
+</div>
+
+{% else %}
+
+  <div class="row">
+     <div class="col-lg-8 col-lg-offset-2">
+    <div class="alert alert-info" role="alert">Unbelievable. This test case has not been executed yet</div>
+</div>
+</div>
+
+{% endif %}
+{% endblock %}

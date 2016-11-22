@@ -18,7 +18,7 @@
 {% for case in object.testcase_set.all %}
 <tr>
   <td>
-    <a href="#">{{ case.title }}</a>
+    <a href="{% url 'greenfield:case' case.id %}">{{ case.title }}</a>
   </td>
   <td>
     <form action="{% url 'greenfield:delete_case' object.id case.id %}" method=post>
