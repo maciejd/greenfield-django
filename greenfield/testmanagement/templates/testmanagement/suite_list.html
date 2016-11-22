@@ -26,7 +26,9 @@
   <td>
     <form action="{% url 'greenfield:delete_suite' suite.id %}" method=post>
     {% csrf_token %}
-      <button type=submit class="btn btn-danger pull-right">Delete</button>
+      <button type=submit class="btn btn-danger btn-xs pull-right">
+<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+</button>
     </form>
   </td>
 </tr>

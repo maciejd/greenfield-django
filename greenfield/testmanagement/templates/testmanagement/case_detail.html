@@ -14,12 +14,12 @@
          <tr>
            <th>Test Run</th>
            <th>Executed on</th>
-           <th>Status</th>
+           <th class="text-right">Status</th>
          {% for e in object.testexecution_set.all %}
          <tr>
           <td><a href="{% url 'greenfield:run' e.run.id  %}">{{ e.run.title }}</a></td>
           <td>{{ e.updated_at }} </td>
-          <td><span class="label label-{{ e.status|label }}">{{ e.get_status_display }}</span></td>
+          <td><span class="label label-{{ e.status|label }} pull-right">{{ e.get_status_display }}</span></td>
          </tr>
   {% endfor %}
       </table>

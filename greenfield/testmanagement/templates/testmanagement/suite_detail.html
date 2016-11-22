@@ -23,7 +23,9 @@
   <td>
     <form action="{% url 'greenfield:delete_case' object.id case.id %}" method=post>
     {% csrf_token %}
-      <button type=submit class="btn btn-danger pull-right">Delete</button>
+      <button type=submit class="btn btn-danger btn-xs pull-right">
+  <span class="glyphicon glyphicon-remove" aria-hidden="true">
+</button>
     </form>
   </td>
 </tr>
@@ -44,7 +46,7 @@
 <div class="form-group col-lg-6 col-lg-offset-2">
       <label for="title">Add new Test Case</label>
       <div class="input-group">
-             <input type="text" id="title" class="form-control" name="title" placeholder="Test suite title" required>
+             <input type="text" id="title" class="form-control" name="title" placeholder="Test suite title" required autofocus>
              <span class="input-group-btn">
                <button type="submit" class="btn btn-secondary">Add</button>
              </span> 
