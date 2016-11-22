@@ -1,9 +1,54 @@
-<h1>{{ object.title }}</h1>
+{% extends 'testmanagement/base.html' %}
 
+{% block content %}
+<div class="container-fluid">
+ <div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+      <h3>Test Cases for {{ object.title }}</h3>
+    </div>
+  </div>
+{% if object.testcase_set.all %}
+<div class="row">
+     <div class="col-lg-8 col-lg-offset-2">
+       <table class="table">
+         <tr>
+           <th>Test Case</th>
+           <th class="text-right">Delete Case</th>
+         </tr>
 {% for case in object.testcase_set.all %}
-    <li>{{ case.title }}</li>
-{% empty %}
-    <li>No cases yet.</li>
+<tr>
+  <td>
+    <a href="#">{{ case.title }}</a>
+  </td>
+  <td>
+    <form action="{% url 'greenfield:delete_case' object.id case.id %}" method=post>
+    {% csrf_token %}
+      <button type=submit class="btn btn-danger pull-right">Delete</button>
+    </form>
+  </td>
+</tr>
 {% endfor %}
-</ul>
-
+</table>
+</div>
+</div>
+{% else %}
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2">
+    <div class="alert alert-info" role="alert">Unbelievable.  No test cases here so far</div>
+  </div>
+</div>
+{% endif %}
+<div class="row">
+ <form action="{% url 'greenfield:add_case' object.id %}" method=post>
+{% csrf_token %}
+<div class="form-group col-lg-6 col-lg-offset-2">
+      <div class="input-group">
+             <input type="text" class="form-control" name="title" placeholder="Test suite title" required>
+             <span class="input-group-btn">
+               <button type="submit" class="btn btn-secondary">Add new</button>
+             </span> 
+       </div>
+     </div>
+</form>
+</div>
+{% endblock %}

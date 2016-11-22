@@ -5,7 +5,9 @@ from . import views
 app_name = 'greenfield'
 urlpatterns = [
     url(r'^suite/$', views.SuiteListView.as_view(), name='suites'),
-    url(r'^suite/add_suite$', views.add_suite, name='add_suite'),
-    url(r'^suite/delete_suite/(?P<pk>[0-9]+)/$', views.delete_suite, name='delete_suite'),
-    url(r'^suite/(?P<pk>[0-9]+)/$', views.SuiteDetailView.as_view(), name='suite')
-]
+    url(r'^suite/(?P<pk>[0-9]+)/$', views.SuiteDetailView.as_view(), name='suite'),
+    url(r'^suite/(?P<suite_id>[0-9]+)/add$', views.add_case, name='add_case'),
+    url(r'^suite/(?P<suite_id>[0-9]+)/delete/(?P<case_id>[0-9]+)/$', views.delete_case, name='delete_case'),
+    url(r'^suite/add$', views.add_suite, name='add_suite'),
+    url(r'^suite/delete/(?P<suite_id>[0-9]+)/$', views.delete_suite, name='delete_suite'),
+    ]

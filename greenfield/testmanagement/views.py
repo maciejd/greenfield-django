@@ -20,6 +20,15 @@ def add_suite(request):
     TestSuite(title=request.POST['title']).save()
     return HttpResponseRedirect(reverse('greenfield:suites'))
 
-def delete_suite(request, pk):
-    get_object_or_404(TestSuite, pk=pk).delete()
+def delete_suite(request, suite_id):
+    get_object_or_404(TestSuite, pk=suite_id).delete()
     return HttpResponseRedirect(reverse('greenfield:suites'))
+
+def add_case(request, suite_id):
+    ts = get_object_or_404(TestSuite, pk=suite_id)
+    TestCase(title=request.POST['title'], suite=ts).save()
+    return HttpResponseRedirect(reverse('greenfield:suite', kwargs={'pk':suite_id}))
+   
+def delete_case(request, suite_id, case_id):
+    get_object_or_404(TestCase, pk=case_id).delete()
+    return HttpResponseRedirect(reverse('greenfield:suite', kwargs={'pk':suite_id}))
