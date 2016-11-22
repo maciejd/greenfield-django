@@ -45,10 +45,11 @@
   <form action="{% url 'greenfield:add_suite' %}" method=post>
   {% csrf_token %}
     <div class="form-group col-lg-6 col-lg-offset-2">
+      <label for="title">Create new Test Suite</label>
       <div class="input-group">
-             <input type="text" class="form-control" name="title" placeholder="Test suite title" required>
+             <input type="text" id="title" class="form-control" name="title" placeholder="Test suite title" required>
              <span class="input-group-btn">
-               <button type="submit" class="btn btn-secondary">Add new</button>
+               <button type="submit" class="btn btn-secondary">Create</button>
              </span> 
        </div>
      </div>

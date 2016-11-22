@@ -59,6 +59,7 @@
   <form action="{% url 'greenfield:add_run' %}" method=post>
    {% csrf_token %}
     <div class="col-lg-6 col-lg-offset-2">      
+<label for="title">Create new Test Run</label>
 <div class="add-run input-group">
                <select class="form-control" name="suite_id">
                {% for suite in suites %}
@@ -67,9 +68,9 @@
                  {% endif %}
                {% endfor %}
               </select>
-             <input type="text" class="form-control" name="title" placeholder="Test run title" required>
+             <input type="text" class="form-control" id="title" name="title" placeholder="Test run title" required>
              <span class="input-group-btn">
-               <button type="submit" class="btn btn-secondary">Create new</button>
+               <button type="submit" class="btn btn-secondary">Create</button>
              </span>
        </div>
 </div>
