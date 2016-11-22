@@ -1,8 +1,58 @@
-<h1>Suites</h1>
+
 <ul>
-{% for suite in object_list %}
-    <li><a href="{% url 'greenfield:suite' suite.id %}">{{ suite.title }}</a></li>
-{% empty %}
-    <li>No suites yet.</li>
-{% endfor %}
 </ul>
+
+{% extends 'testmanagement/base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+ <div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+      <h3>Test Suites</h3>
+    </div>
+  </div>
+{% if object_list %}
+<div class="row">
+     <div class="col-lg-8 col-lg-offset-2">
+       <table class="table">
+         <tr>
+           <th>Test Suite</th>
+           <th class="text-right">Delete Suite</th>
+         </tr>
+
+{% for suite in object_list %}
+<tr>
+  <td>
+    <a href="{% url 'greenfield:suite' suite.id %}">{{ suite.title }}</a>
+  </td>
+  <td>
+    <form action="#" method=post>
+      <input type=hidden value="" name="ts_id"></input>
+      <button type=submit class="btn btn-danger pull-right">Delete</button>
+    </form>
+  </td>
+</tr>
+{% endfor %}
+</table>
+</div>
+</div>
+{% else %}
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2">
+    <div class="alert alert-info" role="alert">Unbelievable.  No test suites here so far</div>
+  </div>
+</div>
+{% endif %}
+<div class="row">
+ <form action="#" method=post>
+<div class="form-group col-lg-6 col-lg-offset-2">
+      <div class="input-group">
+             <input type="text" class="form-control" name="title" placeholder="Test suite title" required>
+             <span class="input-group-btn">
+               <button type="submit" class="btn btn-secondary">Add new</button>
+             </span> 
+       </div>
+     </div>
+</form>
+</div>
+{% endblock %}
