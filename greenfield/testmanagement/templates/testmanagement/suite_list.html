@@ -13,6 +13,7 @@
        <table class="table">
          <tr>
            <th>Test Suite</th>
+           <th>Test Case #</th>
            <th class="text-right">Delete Suite</th>
          </tr>
 
@@ -21,6 +22,7 @@
   <td>
     <a href="{% url 'greenfield:suite' suite.id %}">{{ suite.title }}</a>
   </td>
+  <td>{{ suite.testcase_set.all.count }}</td>
   <td>
     <form action="{% url 'greenfield:delete_suite' suite.id %}" method=post>
     {% csrf_token %}
