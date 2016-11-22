@@ -29,7 +29,11 @@ class TestRun(models.Model):
 
 @python_2_unicode_compatible
 class TestExecution(models.Model):
-    STATUSES = ((0, 'UNEXECUTED'), (1, 'PASSED'), (2, 'FAILED'), (3, 'BLOCKED'))
+    UNEXECUTED = 0
+    PASSED = 1
+    FAILED = 2
+    BLOCKED = 3
+    STATUSES = ((UNEXECUTED, 'UNEXECUTED'), (PASSED, 'PASSED'), (FAILED, 'FAILED'), (BLOCKED, 'BLOCKED'))
     status = models.PositiveSmallIntegerField(choices=STATUSES, default=0)
     run =  models.ForeignKey(TestRun, on_delete=models.CASCADE)
     case = models.ForeignKey(TestCase, on_delete=models.CASCADE)

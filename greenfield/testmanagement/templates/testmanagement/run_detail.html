@@ -1,0 +1,37 @@
+{% extends 'testmanagement/base.html' %}
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+      <h3>{{ run.title }}</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+      <table class="table">
+         <tr>
+           <th>Test case</th>
+           <th>Executed on</th>
+           <th>Result</th>
+         </tr>
+         {% for e in run.testexecution_set.all %}
+         <tr>
+           <td>{{ e.case.title }}</td>
+           <td>{{ e.updated_at }}</td>
+           <td>
+             <form name="result" action="{% url 'greenfield:update_result' run.id e.id %}" method="POST">   
+               {% csrf_token %}
+               <select class="selectpicker" data-style="btn-default" name="status" onchange="this.form.submit()">
+               {% for value, text in STATUSES %}
+                 <option value="{{ value }}" {% if value == e.status %} selected="selected"{% endif %}>{{ text }}</option>
+               {% endfor %}
+              </select>
+             </form>
+           </td>
+          </tr>
+  {% endfor %}  
+</table>
+</div>
+</div>
+</div>
+{% endblock %}

@@ -20,7 +20,7 @@
          </tr>
          {% for run in runs %}
          <tr>
-          <td><a href=#>{{ run.title }}</a></td>
+          <td><a href="{% url 'greenfield:run' run.id %}">{{ run.title }}</a></td>
 	  <td>{{ run.suite.title }}</td>
           <td>{{ run.created_at }}</td>
           <td>

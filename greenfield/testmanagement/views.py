@@ -49,5 +49,13 @@ def add_run(request):
 def delete_run(request, run_id):
     get_object_or_404(TestRun, pk=run_id).delete()
     return HttpResponseRedirect(reverse('greenfield:runs'))
-
     
+def show_run(request, run_id):
+    tr = get_object_or_404(TestRun, pk=run_id)
+    return render(request, 'testmanagement/run_detail.html', {'run': tr, 'STATUSES':TestExecution.STATUSES})
+
+def update_result(request, run_id, execution_id):
+    e = get_object_or_404(TestExecution, pk=execution_id)
+    e.status=request.POST['status']
+    e.save()
+    return HttpResponseRedirect(reverse('greenfield:run', kwargs={'run_id':run_id}))
