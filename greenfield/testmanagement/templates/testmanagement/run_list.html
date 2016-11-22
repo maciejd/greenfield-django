@@ -1,0 +1,76 @@
+{% extends 'testmanagement/base.html' %}
+{% block content %}
+<div class="container-fluid">
+ <div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+      <h3>Test Runs</h3>
+    </div>
+  </div>
+{% if runs %}
+  <div class="row">
+    <div class="col-lg-offset-2 col-lg-8">
+      <table class="table">
+         <tr>
+           <th>Run name</th>
+           <th>Created date</th>
+           <th class="col-xs-6 col-sm-6">Summary</th>
+	   <th class="text-right">Delete run</th>
+         </tr>
+         {% for run in runs %}
+         <tr>
+          <td><a href=#>{{ run.title }}</a></td>
+          <td>{{ run.created }}</td>
+          <td>
+     	    <div class="progress">
+             <div class="progress-bar progress-bar-success" style="width:33%">
+               <span class="sr-only"></span>
+             </div>
+             <div class="progress-bar progress-bar-warning" style="width:33%">
+               <span class="sr-only"></span>
+             </div>        
+             <div class="progress-bar progress-bar-danger" style="width:33%">
+               <span class="sr-only"></span>
+             </div>
+           </div>
+         </td>
+<td>
+<form action="{% url 'greenfield:delete_run' run.id %}" method=post>
+{% csrf_token %}
+  <button type="submit" class="btn btn-danger pull-right">Delete run</button>
+</form>
+</td>
+</tr>
+{% endfor %}
+    </table>
+  </div>
+</div>
+{% else %}
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+      <div class="alert alert-info" role="alert"> Unbelievable.  No test runs here so far</div>
+    </div>
+</div>
+{% endif %}
+{% if suites %}
+<div class="row">
+  <form action="{% url 'greenfield:add_run' %}" method=post>
+   {% csrf_token %}
+    <div class="col-lg-6 col-lg-offset-2">      
+<div class="add-run input-group">
+               <select class="form-control" name="suite_id">
+               {% for suite in suites %}
+                 <option value="{{ suite.id }}"}>{{ suite.title }}</option>
+               {% endfor %}
+              </select>
+             <input type="text" class="form-control" name="title" placeholder="Test run title" required>
+             <span class="input-group-btn">
+               <button type="submit" class="btn btn-secondary">Create new</button>
+             </span>
+       </div>
+</div>
+</form>
+</div>
+    {% endif %}
+
+</div>
+{% endblock %}

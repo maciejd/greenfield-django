@@ -32,3 +32,19 @@ def add_case(request, suite_id):
 def delete_case(request, suite_id, case_id):
     get_object_or_404(TestCase, pk=case_id).delete()
     return HttpResponseRedirect(reverse('greenfield:suite', kwargs={'pk':suite_id}))
+
+def show_runs(request):
+    runs = TestRun.objects.all()
+    suites = TestSuite.objects.all()
+    return render(request, 'testmanagement/run_list.html', {'runs': runs, 'suites': suites})
+
+def add_run(request):
+    ts = get_object_or_404(TestSuite, pk=request.POST['suite_id'])
+    TestRun(title=request.POST['title'], suite=ts).save()
+    return HttpResponseRedirect(reverse('greenfield:runs'))
+  
+def delete_run(request, run_id):
+    get_object_or_404(TestRun, pk=run_id).delete()
+    return HttpResponseRedirect(reverse('greenfield:runs'))
+
+    
