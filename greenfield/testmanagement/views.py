@@ -5,9 +5,6 @@ from django.views import generic
 
 from .models import TestRun,TestSuite,TestCase,TestExecution
 
-def index(request):
-    return HttpResponse("Welcome to Greenfield")
-
 class SuiteListView(generic.ListView):
     model = TestSuite
     template_name = 'testmanagement/suite_list.html'

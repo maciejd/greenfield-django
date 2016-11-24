@@ -4,20 +4,32 @@ from django.urls import reverse
 # Create your tests here.
 
 def add_suite():
-    s = models.TestSuite.objects.create(title='test')
+    s = models.TestSuite.objects.create(title='TestSuite')
     return s
 
 def add_case(suite):
-    c = models.TestCase.objects.create(title='test', suite=suite)
+    c = models.TestCase.objects.create(title='TestCase', suite=suite)
     return c
 
 def add_run(suite):
-    r = models.TestRun.objects.create(title='test', suite=suite)
+    r = models.TestRun.objects.create(title='TestRun', suite=suite)
     return r
 
 def add_execution(case, run):
     e = models.TestExecution.objects.create(case=case, run=run, status=0)
     return e
+
+class TestRunMethodTest(TestCase):
+    def test_run_to_string(self):
+        s = add_suite()
+        c = add_case(s)
+        r = add_run(s)
+        self.assertEqual(str(r), 'TestRun')
+
+class TestSuiteMethodTest(TestCase):
+    def test_suite_to_string(self):
+        s = add_suite()
+        self.assertEqual(str(s), 'TestSuite')
 
 class TestCaseMethodTest(TestCase):
     def test_cases_assigned_to_suite(self):
@@ -30,6 +42,11 @@ class TestCaseMethodTest(TestCase):
         s = add_suite()
         c1 = add_case(s)
         self.assertEqual(c1.suite, s)
+
+    def test_case_to_string(self):
+        s = add_suite()
+        c = add_case(s)
+        self.assertEqual(str(c), 'TestCase')
 
 class TestCaseExecutionMethodTest(TestCase):
     def test_executions_assigned_to_run(self):
@@ -59,6 +76,14 @@ class TestCaseExecutionMethodTest(TestCase):
         r = add_run(s)
         e = add_execution(c, r)
         self.assertEqual(e.case, c)
+
+    def test_case_to_string(self):
+        s = add_suite()
+        c = add_case(s)
+        r = add_run(s)
+        e = add_execution(c, r)
+        self.assertEqual(str(e), 'UNEXECUTED: TestCase in TestRun')
+
       
 class RunListViewTests(TestCase):
     def test_suite_not_returned_if_0_cases(self):
