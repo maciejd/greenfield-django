@@ -65,9 +65,7 @@
 <div class="add-run input-group">
                <select class="form-control" name="suite_id">
                {% for suite in suites %}
-                 {% if suite.testcase_set.all.count > 0 %}
                    <option value="{{ suite.id }}"}>{{ suite.title }}</option>
-                 {% endif %}
                {% endfor %}
               </select>
              <input type="text" class="form-control" id="title" name="title" placeholder="Test run title" required>

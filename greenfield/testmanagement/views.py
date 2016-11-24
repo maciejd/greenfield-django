@@ -35,7 +35,7 @@ def delete_case(request, suite_id, case_id):
 
 def show_runs(request):
     runs = TestRun.objects.all()
-    suites = TestSuite.objects.all()
+    suites = TestSuite.objects.exclude(testcase__isnull=True)
     return render(request, 'testmanagement/run_list.html', {'runs': runs, 'suites': suites})
 
 def add_run(request):
