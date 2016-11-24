@@ -71,9 +71,15 @@ class RunListViewTests(TestCase):
         c = add_case(s)
         response = self.client.get(reverse('greenfield:runs'))
         self.assertEqual(list(response.context['suites']), [s])
+    
+    def test_create_run(self):
+        s = add_suite()
+        c = add_case(s)
+        response = self.client.post(reverse('greenfield:add_run'), {'title': 'TestRun', 'suite_id': s.id})
+        self.assertEqual(models.TestRun.objects.all().count(), 1)
+        self.assertEqual(models.TestRun.objects.all().first().suite, s)
 
-
-class UpdateResultViewTest(TestCase):
+class RunDetailViewTest(TestCase):
     def test_status_change(self):
         s = add_suite()
         c = add_case(s)
@@ -81,11 +87,5 @@ class UpdateResultViewTest(TestCase):
         e = add_execution(c, r)
         response = self.client.post(reverse('greenfield:update_result', kwargs={'run_id': r.id, 'execution_id': e.id}), {'status':1})
         self.assertEqual(models.TestExecution.objects.get(pk=e.pk).status, 1)
+ 
 
-class RunListViewTest(TestCase):
-    def test_create_run(self):
-        s = add_suite()
-        c = add_case(s)
-        response = self.client.post(reverse('greenfield:add_run'), {'title': 'TestRun', 'suite_id': s.id})
-        self.assertEqual(models.TestRun.objects.all().count(), 1)
-        self.assertEqual(models.TestRun.objects.all().first().suite, s)
