@@ -10,3 +10,5 @@ Test management app using Django, SQLite and Bootstrap (with 100% test coverage)
 4. Run container in detached mode and publish port 8080 `docker run -d -p 8080:8080 greenfield`
   
 5. App should be accessible on port 8080 `http://localhost:8080/greenfield/suite`
+
+![alt text](http://i.imgur.com/a8N1o8P.png "Greenfield Report List")
