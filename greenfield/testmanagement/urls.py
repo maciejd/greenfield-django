@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'case/(?P<pk>[0-9]+)/$', login_required(views.CaseDetailView.as_view()), name='case'),
     url(r'^login/$', auth_views.login,  {'template_name': 'testmanagement/login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': 'greenfield:login'}, name='logout'),
+    url(r'^case/(?P<case_id>[0-9]+)/save$', views.save_case, name='save_case'),
     ]

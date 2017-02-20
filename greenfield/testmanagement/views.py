@@ -68,3 +68,10 @@ def update_result(request, run_id, execution_id):
 class CaseDetailView(generic.DetailView):
     model = TestCase
     template_name = 'testmanagement/case_detail.html'
+
+@login_required
+def save_case(request, case_id):
+    tc = get_object_or_404(TestCase, pk=case_id)
+    tc.title=request.POST['title']
+    tc.save()
+    return HttpResponseRedirect(reverse('greenfield:suite', kwargs={'pk': tc.suite.id}))
