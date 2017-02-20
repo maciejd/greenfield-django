@@ -22,9 +22,9 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="{% url 'greenfield:suites' %}">Test Suites</a></li>
-                        <li><a href="{% url 'greenfield:runs' %}">Test Runs</a></li>
                         {% if user.is_authenticated %}
+                            <li><a href="{% url 'greenfield:suites' %}">Test Suites</a></li>
+                            <li><a href="{% url 'greenfield:runs' %}">Test Runs</a></li>
                             <li><a href="{% url 'greenfield:logout' %}">Logout</a></li>
                         {% else %}
                             <li><a href="{% url 'greenfield:login' %}">Login</a></li>
