@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.contrib.auth import views as auth_views
 
 from . import views
 
@@ -16,4 +17,6 @@ urlpatterns = [
     url(r'^run/add$', views.add_run, name='add_run'),
     url(r'^run/delete/(?P<run_id>[0-9]+)/&$', views.delete_run, name='delete_run'),
     url(r'case/(?P<pk>[0-9]+)/$', views.CaseDetailView.as_view(), name='case'),
+    url(r'^login/$', auth_views.login,  {'template_name': 'testmanagement/login.html'}, name='login'),
+    url(r'^logout/$', auth_views.logout, {'next_page': 'greenfield:login'}, name='logout'),
     ]
